@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2 Truths & 1 Lie</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+            color: #333;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        li {
+            background: white;
+            margin: 20px 0;
+            padding: 25px 30px;
+            border-radius: 18px;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        li:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        strong {
+            color: #e74c3c;
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 35px;
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            transition: background 0.25s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background: #43a047;
+            transform: scale(1.05);
+        }
+
+        .reveal-btn {
+            background: #3498db;
+        }
+
+        .reveal-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Answer coloring */
+        .truth {
+            background: #d4edda;
+        }
+
+        .lie {
+            background: #f8d7da;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎭 2 Truths & 1 Lie</h1>
+    <ul>
+        {% for text, kind in statements %}
+            <li class="{% if show_answer %}{{ kind }}{% endif %}">
+                {{ text }}
+                {% if show_answer and kind == "lie" %}
+                    <strong>⬅ This is the lie!</strong>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if not show_answer %}
+        <a href="?action=reveal" class="reveal-btn">Reveal the Lie</a>
+    {% else %}
+        <a href="?action=next">Next ➡</a>
+    {% endif %}
+</body>
+</html>
